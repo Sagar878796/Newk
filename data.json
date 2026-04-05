@@ -1,18 +1,8 @@
 {
   "channels": [
     {
-      "name": "SRH vs LSG MATCH 1 HINDI",
-      "logo": "https://img10.hotstar.com/image/upload/f_auto,t_web_m_2x/sources/r1/cms/prod/7576/1775299927576-h",
-      "category": "Sports",
-      "url": "https://jcevents.hotstar.com/bpk-tv/f0e3e64ae415771d8e460317ce97aa5e/Fallback/f0e3e64ae415771d8e460317ce97aa5e.m3u8",
-      "headers": {
-        "cookie": "hdntl=exp=1775045390~acl=%2f*~id=bee54db31a4edb8cfdc3a9f471eedfe8~data=hdntl~hmac=292bd22b964b32623751ef4ca20d23d45fcaaaaa9bdafbddfbf97275a9627369",
-        "user-agent": "Hotstar;in.startv.hotstar/25.02.24.8.11169 (Android/15)"
-      }
-    },
-    {
       "name": "RCB vs CSK MATCH 2 HINDI",
-      "logo": "https://img10.hotstar.com/image/upload/f_auto,q_90/sources/r1/cms/prod/4745/1775196184745-h",
+      "logo": "https://img10.hotstar.com/image/upload/f_auto,q_90/sources/r1/cms/prod/9291/1775301179291-h",
       "category": "Sports",
       "url": "https://livetv.hotstar.com/mp1/gec-india-1540065788/fa6a4f0005ef4f90ab24484d165b0aaf/index.mpd",
       "headers": {
@@ -25,12 +15,22 @@
       }
     },
     {
+      "name": "SRH vs LSG MATCH 1 HINDI",
+      "logo": "https://img10.hotstar.com/image/upload/f_auto,t_web_m_2x/sources/r1/cms/prod/7576/1775299927576-h",
+      "category": "Sports",
+      "url": "https://jcevents.hotstar.com/bpk-tv/f0e3e64ae415771d8e460317ce97aa5e/Fallback/f0e3e64ae415771d8e460317ce97aa5e.m3u8",
+      "headers": {
+        "cookie": "hdntl=exp=1775045390~acl=%2f*~id=bee54db31a4edb8cfdc3a9f471eedfe8~data=hdntl~hmac=292bd22b964b32623751ef4ca20d23d45fcaaaaa9bdafbddfbf97275a9627369",
+        "user-agent": "Hotstar;in.startv.hotstar/25.02.24.8.11169 (Android/15)"
+      }
+    },
+    {
       "name": "Star Sports 2 Hindi",
       "logo": "https://img10.hotstar.com/image/upload/f_auto,q_90/sources/r1/cms/prod/8763/1739203338763-a",
       "category": "Sports",
       "url": "https://jiotvioslive.cdn.jio.com//bpk-tv/StarSports2Hin_BTS/output/index.mpd",
       "headers": {
-        "cookie": "__hdnea__=st=1775357601~exp=1775444001~acl=/*~hmac=64f406ab67f1bb290adf0a3760989ceb21c9ae168af24699705f7268b696edc8",
+        "cookie": "__hdnea__=st=1775390786~exp=1775477186~acl=/*~hmac=c5f67893ca9bd46e07c32c78134aa5f9ea69ca309395f1cc62211eb3d407ebd5",
         "user-agent": "plaYtv/7.1.3 (Linux;Android 13) ygx/824.1 ExoPlayerLib/824.0"
       },
       "drm": {
@@ -13296,7 +13296,7 @@
       "name": "SRH vs LSG MATCH 1 HINDI",
       "logo": "https://img10.hotstar.com/image/upload/f_auto,t_web_m_2x/sources/r1/cms/prod/7576/1775299927576-h",
       "category": "Sports",
-      "url": "https://livevideos.cricbuzz.com/hls/live/2123519/WCB-CA-HINDI/9241/149699/master.m3u8",
+      "url": "https://livevideos.cricbuzz.com/hls/live/2123519/WCB-CA-HINDI/9241/149710/master.m3u8",
       "headers": {
         "cookie": "hdntl=exp=1775379903~acl=%2f*~id=xunivamy%40denipl.com~data=hdntl,flavour%3aCB,matchId%3a149695,debug4xx%3afalse,country%3aAE~hmac=d9b4e38e10f1344fa9a3ef37f87920243c7cf9808ba64516e7c23cb32dfd40cc",
         "user-agent": "100.42.240.25"
