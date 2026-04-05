@@ -1,22 +1,36 @@
 name: Cookie Update Bot
+
 on:
   schedule:
-    - cron: '0 */3 * * *' # Har 3 ghante mein auto-run hoga
+    - cron: '0 */3 * * *'
   workflow_dispatch:
+
 jobs:
   build:
     runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install requests
+
       - name: Run script
-        run: |
-          pip install requests
-          python update_cookie.py
+        run: python update_cookie.py
+
       - name: Commit changes
         run: |
           git config --global user.name "Bot"
           git config --global user.email "bot@github.com"
-          git add min.m3u
-          git commit -m "Auto Cookie Update" || exit 0
+          git add .
+          git commit -m "Auto Cookie Update" || echo "No changes"
           git push
-          
