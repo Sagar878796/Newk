@@ -3,8 +3,13 @@ import requests
 import re
 
 M3U_URL = "https://raw.githubusercontent.com/Prtstream820894/prtstreams/refs/heads/main/ptt.m3u"
-OUTPUT = "data.json"
 
+JSON_OUTPUT = "data.json"
+M3U_OUTPUT = "output.m3u"
+
+# =========================
+# 🔹 M3U ➝ JSON
+# =========================
 res = requests.get(M3U_URL)
 lines = res.text.splitlines()
 
@@ -77,8 +82,64 @@ while i < len(lines):
 
     i += 1
 
-with open(OUTPUT, "w", encoding="utf-8") as f:
+# Save JSON
+with open(JSON_OUTPUT, "w", encoding="utf-8") as f:
     json.dump({"channels": channels}, f, indent=2)
 
-print("✅ Advanced JSON Created")
+print("✅ JSON Created")
 print("🔥 Channels:", len(channels))
+
+
+# =========================
+# 🔹 JSON ➝ M3U
+# =========================
+
+with open(JSON_OUTPUT, "r", encoding="utf-8") as f:
+    data = json.load(f)
+
+channels = data.get("channels", [])
+
+m3u_lines = ["#EXTM3U"]
+
+for ch in channels:
+    name = ch.get("name", "")
+    logo = ch.get("logo", "")
+    group = ch.get("category", "Live")
+    url = ch.get("url", "")
+
+    headers = ch.get("headers", {})
+    cookie = headers.get("cookie", "")
+    user_agent = headers.get("user-agent", "")
+
+    drm = ch.get("drm", {})
+    drm_id = drm.get("key_id", "")
+    drm_key = drm.get("key", "")
+
+    # EXTINF
+    extinf = f'#EXTINF:-1 tvg-logo="{logo}" group-title="{group}",{name}'
+    m3u_lines.append(extinf)
+
+    # Headers
+    if cookie or user_agent:
+        header = "#EXTHTTP:{"
+        if cookie:
+            header += f'"cookie":"{cookie}"'
+        if user_agent:
+            if cookie:
+                header += ","
+            header += f'"user-agent":"{user_agent}"'
+        header += "}"
+        m3u_lines.append(header)
+
+    # DRM
+    if drm_key:
+        m3u_lines.append(f'#KODIPROP:inputstream.adaptive.license_key={drm_id}:{drm_key}')
+
+    # URL
+    m3u_lines.append(url)
+
+# Save M3U
+with open(M3U_OUTPUT, "w", encoding="utf-8") as f:
+    f.write("\n".join(m3u_lines))
+
+print("✅ M3U Created")
