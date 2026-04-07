@@ -1,31 +1,30 @@
 import requests
 
-url = "https://jtvp.byethost14.com/channels.json"
-output = "playlist.m3u"
+JSON_URL = "https://api.allorigins.win/raw?url=https://jtvp.byethost14.com/channels.json"
+OUTPUT = "playlist.m3u"
 
-res = requests.get(url)
+headers = {
+    "User-Agent": "Mozilla/5.0"
+}
 
-if res.status_code != 200:
-    print("Failed to fetch JSON")
-    exit(1)
-
+res = requests.get(JSON_URL, headers=headers)
 data = res.json()
 
-m3u = "#EXTM3U\n"
+m3u = '#EXTM3U x-tvg-url="https://iptv-org.github.io/epg/guides/in.xml"\n'
 
 for ch in data:
     name = ch.get("name", "No Name")
     logo = ch.get("logo", "")
     group = ch.get("category", "Live")
-    link = ch.get("url", "")
+    url = ch.get("url", "")
 
-    if not link:
+    if not url:
         continue
 
-    m3u += f'#EXTINF:-1 tvg-logo="{logo}" group-title="{group}",{name}\n'
-    m3u += f"{link}\n"
+    m3u += f'#EXTINF:-1 tvg-id="{name}" tvg-logo="{logo}" group-title="{group}",{name}\n'
+    m3u += f"{url}\n"
 
-with open(output, "w", encoding="utf-8") as f:
+with open(OUTPUT, "w", encoding="utf-8") as f:
     f.write(m3u)
 
-print("Done")
+print("✅ M3U + EPG Ready")
