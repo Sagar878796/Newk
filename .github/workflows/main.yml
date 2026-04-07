@@ -1,8 +1,8 @@
-name: Cookie Update Bot
+name: JSON to M3U Bot
 
 on:
   schedule:
-    - cron: '0 */3 * * *'
+    - cron: "0 */6 * * *"   # har 6 ghante run hoga
   workflow_dispatch:
 
 jobs:
@@ -13,24 +13,27 @@ jobs:
       contents: write
 
     steps:
-      - name: Checkout
+      - name: Checkout repo
         uses: actions/checkout@v4
+
+      - name: Show files (debug)
+        run: ls -la
 
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.11'
+          python-version: "3.11"
 
-      - name: Install dependencies
+      - name: Install requests
         run: pip install requests
 
       - name: Run script
-        run: python update_cookie.py
+        run: python convert.py
 
-      - name: Commit changes
+      - name: Commit & Push
         run: |
-          git config --global user.name "Bot"
-          git config --global user.email "bot@github.com"
-          git add .
-          git commit -m "Auto Cookie Update" || echo "No changes"
+          git config --global user.name "bot"
+          git config --global user.email "bot@example.com"
+          git add playlist.m3u
+          git commit -m "Auto update M3U" || echo "No changes"
           git push
