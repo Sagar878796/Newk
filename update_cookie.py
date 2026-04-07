@@ -1,40 +1,26 @@
-import json
 import requests
-import re
 
-M3U_URL = "https://raw.githubusercontent.com/Prtstream820894/prtstreams/refs/heads/main/ptt.m3u"
+JSON_URL = "https://jtvp.byethost14.com/channels.json"
+OUTPUT = "playlist.m3u"
 
-JSON_OUTPUT = "data.json"
-M3U_OUTPUT = "output.m3u"
+res = requests.get(JSON_URL)
+data = res.json()
 
-# =========================
-# 🔹 M3U ➝ JSON
-# =========================
-res = requests.get(M3U_URL)
-lines = res.text.splitlines()
+m3u = "#EXTM3U\n"
 
-channels = []
+for ch in data:
+    name = ch.get("name", "Unknown")
+    logo = ch.get("logo", "")
+    group = ch.get("category", "Live")
+    url = ch.get("url", "")
 
-i = 0
-while i < len(lines):
-    line = lines[i].strip()
+    m3u += f'#EXTINF:-1 tvg-logo="{logo}" group-title="{group}",{name}\n'
+    m3u += f"{url}\n"
 
-    if line.startswith("#EXTINF"):
-        name = line.split(",")[-1].strip()
+with open(OUTPUT, "w", encoding="utf-8") as f:
+    f.write(m3u)
 
-        logo = re.search(r'tvg-logo="([^"]+)"', line)
-        group = re.search(r'group-title="([^"]+)"', line)
-
-        logo = logo.group(1) if logo else ""
-        category = group.group(1) if group else "Live"
-
-        cookie = ""
-        user_agent = ""
-        drm_key = ""
-        drm_id = ""
-        url = ""
-
-        for j in range(i+1, min(i+10, len(lines))):
+print("✅ M3U file created: playlist.m3u")        for j in range(i+1, min(i+10, len(lines))):
             l = lines[j].strip()
 
             if "#EXTHTTP" in l and "cookie" in l:
